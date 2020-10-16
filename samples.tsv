@@ -1,0 +1,2 @@
+sample	condition	fq1	fq2
+sample1	sample1	/path/to/root/fastq/SRR12044672_1.fastq	/path/to/root/fastq/SRR12044672_2.fastq
