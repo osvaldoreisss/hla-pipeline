@@ -18,6 +18,4 @@ First edit the samples.tsv file and add sample name, condition, the full path to
 
 ### Run pipeline
 
-```docker run -it -v/path/to/root/fastq/:/path/to/root/fastq/ hla:v1 snakemake -p --use-conda --cores 1 --config samples=samples.tsv threads=1```
-
-The -v/path/to/root/fastq/:/path/to/root/fastq/  must be the full path to the root where the fastq input files are stored.
+```docker run -it -v`pwd`:/data/ hla:v1 snakemake -p --use-conda --cores 1 --config samples=samples.tsv threads=1```
