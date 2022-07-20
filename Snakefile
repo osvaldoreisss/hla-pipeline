@@ -12,16 +12,29 @@ def get_fastq(wildcards):
 
 rule all:
     input: 
-        expand("{sample}_hlahd", sample=samples['sample'])
+        expand("/data/{accession}_hlahd", accession=samples['sample'])
 
 rule run_hla_hd:
     input: 
-        get_fastq
+        "/data/{accession}_1.fastq",
+        "/data/{accession}_2.fastq",
     output: 
-        "{sample}_hlahd"
+        "/data/{accession}_hlahd"
     threads: threads
     log: 
-        "logs/hla-hd/{sample}.log"
+        "/data/logs/hla-hd/{accession}.log"
     shell:
-        "dir=`dirname {input[0]}`; hlahd.sh -t {threads} -m 75 -f /opt/hlahd.1.2.1/freq_data/ {input} /opt/hlahd.1.2.1/HLA_gene.split.txt /opt/hlahd.1.2.1/dictionary/ {output} $dir"
+        "dir=`dirname {input[0]}`; hlahd.sh -t {threads} -m 75 -f /opt/hlahd.1.5.0/freq_data/ {input} /opt/hlahd.1.5.0/HLA_gene.split.txt /opt/hlahd.1.5.0/dictionary/ {output} $dir"
 
+rule get_fastq_pe:
+    output:
+        # the wildcard name must be accession, pointing to an SRA number
+        "/data/{accession}_1.fastq",
+        "/data/{accession}_2.fastq",
+    log:
+        "/data/logs/pe/{accession}.log"
+    params:
+        extra="--skip-technical"
+    threads: 6  # defaults to 6
+    wrapper:
+        "v1.7.1/bio/sra-tools/fasterq-dump"

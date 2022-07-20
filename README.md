@@ -8,7 +8,7 @@ First clone this repository
 
 To download HLA-HD we need to fill a form to get a user and password. After just use wget to download replacing user and passwd with your user and password.
 
-```wget --http-user=user --http-password=password https://www.genome.med.kyoto-u.ac.jp/HLA-HD/filedownload/hlahd.1.2.1.tar.gz```
+```wget --http-user=user --http-password=password https://www.genome.med.kyoto-u.ac.jp/HLA-HD/filedownload/hlahd.1.5.0.tar.gz```
 
 ### Create docker image
 
