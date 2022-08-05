@@ -24,7 +24,7 @@ rule run_hla_hd:
     log: 
         "/data/logs/hla-hd/{accession}.log"
     shell:
-        "dir=`dirname {input[0]}`; hlahd.sh -t {threads} -m 75 -f /opt/hlahd.1.5.0/freq_data/ {input} /opt/hlahd.1.5.0/HLA_gene.split.txt /opt/hlahd.1.5.0/dictionary/ {output} $dir"
+        "dir=`echo {input[0]} | cut -d \"/\" -f2 | cut -d \"_\" -f1`;mkdir -p {output}; hlahd.sh -t {threads} -m 75 -f /opt/hlahd.1.5.0/freq_data/ {input} /opt/hlahd.1.5.0/HLA_gene.split.txt /opt/hlahd.1.5.0/dictionary/ $dir {output}"
 
 rule get_fastq_pe:
     output:
