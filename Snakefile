@@ -19,7 +19,7 @@ rule run_hla_hd:
         "/data/{accession}_1.fastq",
         "/data/{accession}_2.fastq",
     output: 
-        "/data/{accession}_hlahd"
+        directory("/data/{accession}_hlahd")
     threads: threads
     log: 
         "/data/logs/hla-hd/{accession}.log"
